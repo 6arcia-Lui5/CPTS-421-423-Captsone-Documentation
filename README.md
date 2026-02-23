@@ -51,8 +51,3 @@ TODO: Leave the steps below if you want others to contribute to your project.
 TODO: Provide links to additional documentation that may exist in the repo, e.g.,
   * Sprint reports
   * User links
-
-## License
-
-If you haven't already, add a file called `LICENSE.txt` with the text of the appropriate license.
-We recommend using the MIT license: <https://choosealicense.com/licenses/mit/>
