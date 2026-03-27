@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Advanced Research Search</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <div class="container navbar">
+        <a class="logo" href="index.html">Artifact Archive</a>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="advanced-search.html">Advanced Search</a>
+            <a href="account.html">Account</a>
+        </nav>
+    </div>
+</header>
+
+<section class="container">
+
+    <h1 style="margin:2rem 0;">Advanced Artifact Research Search</h1>
+
+    <!-- Primary Search -->
+    <form class="advanced-search-form">
+
+        <h2>Keyword Search</h2>
+        <input type="text" placeholder="Artifact name, inscription, catalog number...">
+
+        <h2>Time Frame</h2>
+        <div class="filter-row">
+            <select>
+                <option>Era</option>
+                <option>Prehistoric</option>
+                <option>Ancient</option>
+                <option>Classical</option>
+                <option>Medieval</option>
+                <option>Early Modern</option>
+                <option>Modern</option>
+            </select>
+
+            <input type="text" placeholder="From Year (e.g. -500)">
+            <input type="text" placeholder="To Year (e.g. 1600)">
+        </div>
+
+        <h2>Material</h2>
+        <div class="filter-row">
+            <select>
+                <option>Primary Material</option>
+                <option>Bronze</option>
+                <option>Iron</option>
+                <option>Gold</option>
+                <option>Silver</option>
+                <option>Stone</option>
+                <option>Clay</option>
+                <option>Papyrus</option>
+                <option>Parchment</option>
+            </select>
+
+            <select>
+                <option>Composite Material</option>
+                <option>Wood & Iron</option>
+                <option>Gold & Gemstone</option>
+            </select>
+        </div>
+
+        <h2>Culture / Civilization</h2>
+        <select>
+            <option>Select Civilization</option>
+            <option>Roman</option>
+            <option>Greek</option>
+            <option>Egyptian</option>
+            <option>Mesopotamian</option>
+            <option>Chinese (Han Dynasty)</option>
+            <option>Aztec</option>
+        </select>
+
+        <h2>Artifact Type</h2>
+        <select>
+            <option>Type</option>
+            <option>Coin</option>
+            <option>Tool</option>
+            <option>Weapon</option>
+            <option>Manuscript</option>
+            <option>Jewelry</option>
+            <option>Map</option>
+            <option>Ceramic</option>
+        </select>
+
+        <h2>Inscription & Symbols</h2>
+        <div class="filter-row">
+            <select>
+                <option>Language of Inscription</option>
+                <option>Latin</option>
+                <option>Greek</option>
+                <option>Hieroglyphic</option>
+                <option>Cuneiform</option>
+                <option>Chinese</option>
+            </select>
+
+            <select>
+                <option>Symbol Present</option>
+                <option>Imperial Eagle</option>
+                <option>Laurel Wreath</option>
+                <option>Religious Symbol</option>
+                <option>Dynastic Seal</option>
+            </select>
+        </div>
+
+        <h2>Discovery Information</h2>
+        <div class="filter-row">
+            <input type="text" placeholder="Discovered After (Year)">
+            <input type="text" placeholder="Discovered Before (Year)">
+        </div>
+
+        <h2>Current Repository</h2>
+        <select>
+            <option>Museum / Archive</option>
+            <option>British Museum</option>
+            <option>Louvre</option>
+            <option>Private Collection</option>
+            <option>University Archive</option>
+        </select>
+
+        <h2>Condition</h2>
+        <select>
+            <option>Condition State</option>
+            <option>Excellent</option>
+            <option>Good</option>
+            <option>Fragmented</option>
+            <option>Restored</option>
+        </select>
+
+        <h2>Sort Results</h2>
+        <select>
+            <option>Relevance</option>
+            <option>Date (Oldest First)</option>
+            <option>Date (Newest First)</option>
+            <option>Recently Discovered</option>
+            <option>Most Viewed</option>
+        </select>
+
+        <button type="submit" style="margin-top:2rem;">Search Archive</button>
+
+    </form>
+
+    <!-- Geographic Map -->
+    <h2 style="margin-top:4rem;">Geographic Region Filter</h2>
+
+    <div class="map-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg">
+        <div class="map-overlay">Select a region (Demo Interface)</div>
+    </div>
+
+</section>
+
+<footer>
+    <div class="container footer-bottom">
+        © 2026 Artifact Archive. Research Database Interface.
+    </div>
+</footer>
+
+</body>
+</html>

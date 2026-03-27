@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <div class="container navbar">
+        <div class="logo">Artifact Archive</div>
+
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="advanced-search.html">Advanced Search</a>
+            <a href="account.html">Account</a>
+            <a href="settings.html">Settings</a>
+        </nav>
+
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <div class="mobile-menu">
+        <a href="index.html">Home</a>
+        <a href="advanced-search.html">Advanced Search</a>
+        <a href="account.html">Account</a>
+    </div>
+</header>
+
+<section class="container">
+
+    <h1 style="margin:2rem 0;">Contributor Dashboard</h1>
+
+    <!-- Profile Section -->
+    <div class="profile-card">
+
+        <img src="prof.jpg" class="profile-img">
+
+        <div class="profile-info">
+            <h2>Dr. Michael Caldwell</h2>
+            <p>Username: MCwell</p>
+            <p>Location: England</p>
+            <p>Role: Approved Contributor</p>
+
+            <button class="edit-btn">Edit Profile</button>
+        </div>
+
+    </div>
+
+    <!-- Dashboard Stats -->
+    <div class="dashboard-stats">
+        <div class="stat-box">
+            <h3>12</h3>
+            <p>Total Submissions</p>
+        </div>
+
+        <div class="stat-box">
+            <h3>9</h3>
+            <p>Approved</p>
+        </div>
+
+        <div class="stat-box">
+            <h3>2</h3>
+            <p>Pending Review</p>
+        </div>
+
+        <div class="stat-box">
+            <h3>3,482</h3>
+            <p>Total Views</p>
+        </div>
+    </div>
+
+    <!-- Search & Filters -->
+    <h2 style="margin-top:3rem;">Search Your Submissions</h2>
+
+    <form class="submission-search">
+
+        <input type="text" placeholder="Search by artifact name...">
+
+        <select>
+            <option>Status: Any</option>
+            <option>Approved</option>
+            <option>Pending</option>
+            <option>Rejected</option>
+        </select>
+
+        <select>
+            <option>Category: Any</option>
+            <option>Manuscript</option>
+            <option>Tool</option>
+            <option>Map</option>
+            <option>Coin</option>
+        </select>
+
+        <button type="submit">Filter</button>
+    </form>
+
+    <!-- Submission History Table -->
+    <h2 style="margin-top:3rem;">Submission History</h2>
+
+    <div class="submission-table">
+
+        <div class="submission-row header">
+            <div>Artifact</div>
+            <div>Status</div>
+            <div>Views</div>
+            <div>Saves</div>
+            <div>Date Submitted</div>
+        </div>
+
+        <div class="submission-row clickable" onclick="window.location.href='artifact.html'">
+
+            <div>Roman Bronze Coin</div>
+            <div class="approved">Approved</div>
+            <div>1,204</div>
+            <div>87</div>
+            <div>Jan 12, 2026</div>
+        </div>
+
+        <div class="submission-row clickable" onclick="window.location.href='artifact.html'">
+
+            <div>Illuminated Manuscript Fragment</div>
+            <div class="pending">Pending</div>
+            <div>542</div>
+            <div>32</div>
+            <div>Feb 3, 2026</div>
+        </div>
+
+        <div class="submission-row clickable" onclick="window.location.href='artifact.html'">
+
+            <div>Ancient Navigation Compass</div>
+            <div class="approved">Approved</div>
+            <div>1,736</div>
+            <div>112</div>
+            <div>Nov 22, 2025</div>
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+    <div class="container footer-bottom">
+        © 2026 Artifact Archive. Preservation • Research • Digital Curation
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

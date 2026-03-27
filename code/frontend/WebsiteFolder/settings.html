@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Settings</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    /* Page-specific styles */
+
+    .topbar {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: var(--topbar-h);
+      background: var(--navy);
+      border-bottom: 2px solid var(--gold);
+      display: flex; align-items: center;
+      padding: 0 1.5rem; gap: 1rem; z-index: 100;
+    }
+    .topbar-brand { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--gold); }
+    .topbar-search { flex: 1; max-width: 380px; margin-left: 1.5rem; position: relative; }
+    .topbar-search input {
+      width: 100%; padding: 0.4rem 1rem 0.4rem 2.2rem;
+      border-radius: 999px; border: 1.5px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.07); color: #fff;
+      font-family: 'DM Sans', sans-serif; font-size: 0.85rem; outline: none;
+    }
+    .topbar-search input::placeholder { color: rgba(255,255,255,0.35); }
+    .topbar-search input:focus { border-color: var(--gold); }
+    .topbar-search span { position: absolute; left: 0.7rem; top: 50%; transform: translateY(-50%); font-size: 0.8rem; color: rgba(255,255,255,0.4); }
+    .topbar-right { margin-left: auto; display: flex; align-items: center; gap: 0.75rem; }
+    .topbar-avatar {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: var(--gold); color: var(--navy);
+      font-weight: 700; font-size: 0.8rem;
+      display: flex; align-items: center; justify-content: center;
+      border: 2px solid rgba(201,168,76,0.4); cursor: pointer;
+    }
+
+    .layout { display: flex; padding-top: var(--topbar-h); min-height: 100vh; }
+
+    .sidebar {
+      position: fixed; top: var(--topbar-h); left: 0; bottom: 0;
+      width: var(--sidebar-w);
+      background: #fff; border-right: 1px solid var(--border);
+      padding: 1.5rem 0; overflow-y: auto; z-index: 90;
+    }
+    .sidebar-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #9aaabb; padding: 0.5rem 1.25rem; margin-top: 0.75rem; }
+    .sidebar a { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 1.25rem; font-size: 0.88rem; color: var(--text-muted); border-left: 3px solid transparent; transition: all 0.15s; }
+    .sidebar a:hover { background: var(--cream); color: var(--text-dark); }
+    .sidebar a.active { background: rgba(201,168,76,0.1); color: var(--navy); font-weight: 600; border-left-color: var(--gold); }
+
+    .main { flex: 1; margin: 2rem auto; padding: 2rem; max-width: 1100px; }
+    .page-header { margin-bottom: 1.75rem; }
+    .page-title { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 700; }
+    .page-subtitle { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.25rem; }
+
+    /* Settings-specific */
+    .card { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 1.75rem; box-shadow: 0 1px 4px rgba(13,27,42,0.07); margin-bottom: 1.25rem; }
+    .card-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+
+    .tabs { display: flex; border-bottom: 2px solid var(--border); margin-bottom: 1.75rem; }
+    .tab-btn { padding: 0.65rem 1.25rem; background: none; border: none; border-bottom: 2px solid transparent; margin-bottom: -2px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500; color: var(--text-muted); cursor: pointer; transition: color 0.2s, border-color 0.2s; }
+    .tab-btn:hover { color: var(--text-dark); }
+    .tab-btn.active { color: var(--navy); border-bottom-color: var(--gold); font-weight: 600; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-actions { display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 0.5rem; }
+    .form-actions .btn-primary { width: auto; padding: 0.6rem 1.4rem; font-size: 0.88rem; }
+
+    .avatar-row { display: flex; align-items: center; gap: 1.25rem; margin-bottom: 1.5rem; }
+    .avatar-circle { width: 72px; height: 72px; border-radius: 50%; background: var(--gold); color: var(--navy); font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .avatar-hint { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.3rem; }
+
+    .toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 0; border-bottom: 1px solid var(--border); }
+    .toggle-row:last-child { border-bottom: none; }
+    .toggle-info strong { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 2px; }
+    .toggle-info span { font-size: 0.8rem; color: var(--text-muted); }
+    .toggle { position: relative; width: 42px; height: 24px; flex-shrink: 0; }
+    .toggle input { opacity: 0; width: 0; height: 0; }
+    .toggle-track { position: absolute; inset: 0; background: var(--cream-dark); border-radius: 999px; cursor: pointer; transition: background 0.2s; }
+    .toggle input:checked + .toggle-track { background: var(--navy); }
+    .toggle-track::after { content: ''; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; background: #fff; border-radius: 50%; transition: transform 0.2s; }
+    .toggle input:checked + .toggle-track::after { transform: translateX(18px); }
+
+    .badge { display: inline-flex; align-items: center; padding: 2px 10px; border-radius: 999px; font-size: 0.7rem; font-weight: 600; }
+    .badge-success { background: rgba(30,126,92,0.1); color: var(--success); }
+
+    .save-alert { display: none; align-items: center; gap: 0.65rem; padding: 0.85rem 1rem; border-radius: 10px; font-size: 0.87rem; background: rgba(30,126,92,0.08); color: var(--success); border: 1px solid rgba(30,126,92,0.2); margin-bottom: 1.25rem; }
+
+    .linked-item { display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 0; border-bottom: 1px solid var(--border); }
+    .linked-item:last-child { border-bottom: none; }
+    .linked-left { display: flex; align-items: center; gap: 0.75rem; }
+    .linked-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; background: var(--cream-dark); }
+    .linked-info strong { display: block; font-size: 0.9rem; font-weight: 600; }
+    .linked-info span { font-size: 0.78rem; color: var(--text-muted); }
+
+    .danger-card { border: 1px solid rgba(192,57,43,0.25); border-radius: 14px; padding: 1.75rem; background: rgba(192,57,43,0.03); }
+    .danger-card .card-title { color: var(--error); border-bottom-color: rgba(192,57,43,0.15); }
+    .danger-item { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid rgba(192,57,43,0.1); }
+    .danger-item:last-child { border-bottom: none; }
+    .danger-item strong { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 2px; }
+    .danger-item span { font-size: 0.8rem; color: var(--text-muted); }
+
+    textarea { width: 100%; padding: 0.75rem 1rem; border: 1.5px solid var(--cream-dark); border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 0.92rem; background: #fff; outline: none; resize: vertical; min-height: 80px; transition: border-color 0.2s, box-shadow 0.2s; }
+    textarea:focus { border-color: var(--navy-light); box-shadow: 0 0 0 3px rgba(36,59,85,0.1); }
+  </style>
+</head>
+<body>
+
+  <!-- TOPBAR — copy to every page!!! this is our main theme, change initials -->
+<header>
+    <div class="container navbar">
+        <div class="logo">Artifact Archive</div>
+
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="advanced-search.html">Advanced Search</a>
+            <a href="account.html">Account</a>
+            <a href="settings.html">Settings</a>
+        </nav>
+
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <div class="mobile-menu">
+        <a href="index.html">Home</a>
+        <a href="advanced-search.html">Advanced Search</a>
+        <a href="account.html">Account</a>
+    </div>
+</header>
+
+  <div class="layout">
+
+    <!-- Main content area -->
+    <main class="main">
+
+      <div class="page-header">
+        <h1 class="page-title">Settings</h1>
+        <p class="page-subtitle">Manage your account preferences and privacy.</p>
+      </div>
+
+      <!-- Save confirmation -->
+      <div class="save-alert" id="save-alert">✅ Your changes have been saved.</div>
+
+      <!-- Tabs -->
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('profile', this)">Profile</button>
+        <button class="tab-btn" onclick="switchTab('password', this)">Password</button>
+        <button class="tab-btn" onclick="switchTab('notifications', this)">Notifications</button>
+        <button class="tab-btn" onclick="switchTab('linked', this)">Linked Accounts</button>
+        <button class="tab-btn" onclick="switchTab('danger', this)">Danger Zone</button>
+      </div>
+
+      <!-- PROFILE -->
+      <div class="tab-panel active" id="tab-profile">
+
+        <div class="card">
+          <div class="card-title">Profile Information</div>
+          <div class="avatar-row">
+            <div class="avatar-circle">MC</div>
+            <div>
+              <button class="btn btn-secondary btn-sm">Upload Photo</button>
+              <p class="avatar-hint">JPG or PNG, max 2MB</p>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field"><label>First Name</label><input type="text" value="Michael"/></div>
+            <div class="field"><label>Last Name</label><input type="text" value="Caldwell"/></div>
+          </div>
+          <div class="field"><label>Username</label><input type="text" value="@Michael Caldwell"/></div>
+          <div class="field">
+            <label>Bio</label>
+            <textarea placeholder="Tell others about yourself..."></textarea>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-secondary btn-sm">Discard</button>
+            <button class="btn btn-primary" onclick="showSave()">Save Changes</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Account Status</div>
+          <div class="field">
+            <label>Email</label>
+            <input type="email" value="Michael.Caldwell@university.edu" readonly style="background:var(--cream); cursor:not-allowed;"/>
+          </div>
+          <div style="display:flex; align-items:center; gap:0.6rem; font-size:0.85rem; color:var(--text-muted);">
+            <span class="badge badge-success">✓ Verified</span> Affiliated with State University
+          </div>
+        </div>
+
+      </div>
+
+      <!-- PASSWORD -->
+      <div class="tab-panel" id="tab-password">
+        <div class="card">
+          <div class="card-title">Change Password</div>
+          <div class="field"><label>Current Password</label><input type="password" placeholder="••••••••"/></div>
+          <div class="field"><label>New Password</label><input type="password" placeholder="••••••••"/></div>
+          <div class="field"><label>Confirm New Password</label><input type="password" placeholder="••••••••"/></div>
+          <div class="form-actions">
+            <button class="btn btn-primary" onclick="showSave()">Update Password</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- NOTIFICATIONS -->
+      <div class="tab-panel" id="tab-notifications">
+        <div class="card">
+          <div class="card-title">Notification Preferences</div>
+          <div class="toggle-row">
+            <div class="toggle-info"><strong>New Followers</strong><span>When someone follows you</span></div>
+            <label class="toggle"><input type="checkbox" checked/><div class="toggle-track"></div></label>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-info"><strong>Post Reactions</strong><span>Likes, smiles, and hearts on your posts</span></div>
+            <label class="toggle"><input type="checkbox" checked/><div class="toggle-track"></div></label>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-info"><strong>Comments & Replies</strong><span>When someone replies to your post</span></div>
+            <label class="toggle"><input type="checkbox" checked/><div class="toggle-track"></div></label>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-info"><strong>Community Updates</strong><span>Activity in communities you've joined</span></div>
+            <label class="toggle"><input type="checkbox"/><div class="toggle-track"></div></label>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-info"><strong>Official Announcements</strong><span>Posts from your school officials</span></div>
+            <label class="toggle"><input type="checkbox" checked/><div class="toggle-track"></div></label>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-primary" onclick="showSave()">Save Preferences</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- LINKED ACCOUNTS -->
+      <div class="tab-panel" id="tab-linked">
+        <div class="card">
+          <div class="card-title">Linked Accounts</div>
+          <div class="linked-item">
+            <div class="linked-left">
+              <div class="linked-icon">🐙</div>
+              <div class="linked-info"><strong>GitHub</strong><span>Not connected</span></div>
+            </div>
+            <button class="btn btn-secondary btn-sm">Connect</button>
+          </div>
+          <div class="linked-item">
+            <div class="linked-left">
+              <div class="linked-icon">💼</div>
+              <div class="linked-info"><strong>LinkedIn</strong><span>Not connected</span></div>
+            </div>
+            <button class="btn btn-secondary btn-sm">Connect</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- DANGER ZONE -->
+      <div class="tab-panel" id="tab-danger">
+        <div class="danger-card">
+          <div class="card-title">⚠️ Danger Zone</div>
+          <div class="danger-item">
+            <div><strong>Deactivate Account</strong><span>Temporarily hide your profile and posts</span></div>
+            <button class="btn btn-secondary btn-sm">Deactivate</button>
+          </div>
+          <div class="danger-item">
+            <div><strong>Delete Account</strong><span>Permanently delete your account and all data</span></div>
+            <button class="btn btn-danger btn-sm">Delete Account</button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    function switchTab(name, btn) {
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-' + name).classList.add('active');
+      btn.classList.add('active');
+    }
+    function showSave() {
+      const a = document.getElementById('save-alert');
+      a.style.display = 'flex';
+      setTimeout(() => a.style.display = 'none', 3000);
+    }
+  </script>
+
+</body>
+</html>

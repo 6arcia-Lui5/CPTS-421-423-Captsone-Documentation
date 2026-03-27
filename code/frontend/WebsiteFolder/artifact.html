@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Artifact Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <div class="container navbar">
+        <a class="logo" href="index.html">Artifact Archive</a>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="advanced-search.html">Advanced Search</a>
+            <a href="account.html">Account</a>
+        </nav>
+    </div>
+</header>
+
+<section class="container">
+
+    <h1 style="margin:2rem 0;">Roman Bronze Coin</h1>
+
+    <!-- Main Image -->
+    <div class="artifact-main-image">
+        <img id="mainArtifactImage" src="artifact1.jpg">
+    </div>
+
+    <!-- Image Thumbnail Bar -->
+    <div class="thumbnail-bar">
+        <img src="artifact1.jpg" onclick="changeImage(this)">
+        <img src="artifact2.jpg" onclick="changeImage(this)">
+        <img src="artifact3.jpg" onclick="changeImage(this)">
+    </div>
+
+    <!-- Artifact Metadata -->
+    <div class="artifact-details">
+
+        <div class="artifact-info">
+            <h2>Artifact Information</h2>
+            <p><strong>Location Found:</strong> Rome, Italy 🇮🇹</p>
+            <p><strong>Date Discovered:</strong> 1923</p>
+            <p><strong>Estimated Time Period:</strong> 2nd Century AD</p>
+            <p><strong>Material:</strong> Bronze</p>
+            <p><strong>Status:</strong> Approved</p>
+        </div>
+
+        <div class="artifact-description">
+            <h2>Description</h2>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam.
+            </p>
+        </div>
+
+        <div class="artifact-symbols">
+            <h2>Insignias & Symbols</h2>
+            <ul>
+                <li>Imperial Eagle</li>
+                <li>Laurel Wreath</li>
+                <li>Latin Inscription: “SPQR”</li>
+            </ul>
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+    <div class="container footer-bottom">
+        © 2026 Artifact Archive. Preservation • Research • Digital Curation
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

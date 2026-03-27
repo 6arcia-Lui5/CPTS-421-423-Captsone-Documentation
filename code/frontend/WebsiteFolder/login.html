@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Artifact — Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream: #f8f5f0;
+      --cream-dark: #e8e4df;
+      --navy: #0d1b2a;
+      --navy-light: #243b55;
+      --gold: #c9a84c;
+      --gold-light: #f5e1a4;
+      --text-dark: #111;
+      --text-muted: #555;
+      --error: #c0392b;
+    }
+
+    /* Page layout */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .right-panel {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      background: var(--cream);
+      width: 100%;
+      max-width: 480px;
+      min-height: 100vh;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    .form-card {
+      width: 100%;
+      max-width: 400px;
+      background: #fff;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      animation: slideIn 0.55s cubic-bezier(0.22,1,0.36,1) forwards;
+    }
+
+    .form-header {
+      margin-bottom: 2rem;
+    }
+    .form-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--text-dark);
+      font-weight: 700;
+      margin: 0;
+    }
+    .form-header p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 0.4rem;
+    }
+
+    .role-selector {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.8rem;
+      background: var(--cream-dark);
+      border-radius: 10px;
+      padding: 4px;
+    }
+    .role-btn {
+      flex: 1;
+      padding: 0.55rem 0;
+      border: none;
+      background: transparent;
+      border-radius: 7px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .role-btn.active {
+      background: var(--navy);
+      color: var(--gold);
+      box-shadow: 0 2px 8px rgba(13,27,42,0.25);
+    }
+
+    .verify-notice {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      background: rgba(13,27,42,0.05);
+      border: 1px solid rgba(13,27,42,0.1);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1.4rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .verify-notice .badge-icon {
+      font-size: 1rem;
+      margin-top: 1px;
+      flex-shrink: 0;
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+    .field {
+      position: relative;
+    }
+    .field label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0.45rem;
+    }
+    .field input {
+      width: 90%;
+      padding: 0.8rem 1rem;
+      border: 1.5px solid var(--cream-dark);
+      border-radius: 10px;
+      font-size: 0.92rem;
+      color: var(--text-dark);
+      background: #fff;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      outline: none;
+    }
+    .field input:focus {
+      border-color: var(--navy-light);
+      box-shadow: 0 0 0 3px rgba(36,59,85,0.1);
+    }
+    .field input::placeholder { color: #b0b8c4; }
+
+    .field .field-icon {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #b0b8c4;
+      cursor: pointer;
+      font-size: 1rem;
+      user-select: none;
+    }
+
+    .options-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+    .remember-me {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+    .remember-me input[type="checkbox"] {
+      width: 16px; height: 16px;
+      accent-color: var(--navy);
+      cursor: pointer;
+    }
+    .remember-me span {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .forgot-link {
+      font-size: 0.85rem;
+      color: var(--navy-light);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .forgot-link:hover { color: var(--gold); }
+
+    .btn-primary {
+      width: 100%;
+      padding: 0.9rem;
+      letter-spacing: 0.04em;
+      position: relative;
+      overflow: hidden;
+      border: none;
+      border-radius: 10px;
+      background: var(--navy);
+      color: var(--gold);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-primary:hover {
+      box-shadow: 0 6px 20px rgba(13,27,42,0.3);
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin: 1.4rem 0;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--cream-dark);
+    }
+    .divider span {
+      font-size: 0.78rem;
+      color: #b0b8c4;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .signup-prompt {
+      text-align: center;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+    .signup-prompt a {
+      color: var(--navy);
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1.5px solid var(--gold);
+      padding-bottom: 1px;
+      transition: color 0.2s;
+    }
+    .signup-prompt a:hover { color: var(--gold); }
+
+    .error-banner {
+      display: none;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(192,57,43,0.08);
+      border: 1px solid rgba(192,57,43,0.25);
+      border-radius: 8px;
+      padding: 0.7rem 1rem;
+      margin-bottom: 1.2rem;
+      font-size: 0.84rem;
+      color: var(--error);
+    }
+    .error-banner.visible { display: flex; }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="right-panel">
+    <div class="form-card">
+
+      <div class="form-header">
+        <h2>Welcome back</h2>
+        <p>Sign in to your Artifact account</p>
+      </div>
+
+      <div class="role-selector" role="group" aria-label="Select account type">
+        <button class="role-btn active" onclick="setRole(this, 'user')">User</button>
+        <button class="role-btn" onclick="setRole(this, 'researcher')">Researcher</button>
+        <button class="role-btn" onclick="setRole(this, 'admin')">Admin</button>
+      </div>
+
+      <div class="verify-notice" id="verify-notice">
+        <span class="badge-icon">🔒</span>
+        <span>Users must have a verified Artifact account. New here? <a href="#" style="color:var(--navy);font-weight:600;">Sign up and verify your account.</a></span>
+      </div>
+
+      <div class="error-banner" id="error-banner">
+        <span>⚠️</span>
+        <span id="error-msg">Invalid credentials. Please try again.</span>
+      </div>
+
+      <form id="login-form" onsubmit="handleSubmit(event)" novalidate>
+        <div class="field-group">
+          <div class="field">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="you@artifact.com" autocomplete="email"/>
+          </div>
+          <div class="field">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your password" class="has-icon" autocomplete="current-password"/>
+            <span class="field-icon" id="toggle-pw" onclick="togglePassword()" title="Show/hide password">👁</span>
+          </div>
+        </div>
+
+        <div class="options-row">
+          <label class="remember-me">
+            <input type="checkbox" id="remember"/>
+            <span>Remember me</span>
+          </label>
+          <a href="ForgotPassword.html" class="forgot-link">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn-primary" id="submit-btn">
+          Sign In
+        </button>
+      </form>
+
+      <div class="divider"><span>or</span></div>
+
+      <div class="signup-prompt">
+        Don't have an account? <a href="createAccount.html">Create one</a>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    let currentRole = 'user';
+
+    function setRole(btn, role) {
+      currentRole = role;
+      document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const notice = document.getElementById('verify-notice');
+      notice.style.display = role === 'user' ? 'flex' : 'none';
+
+      const emailInput = document.getElementById('email');
+      if (role === 'admin') {
+        emailInput.placeholder = 'admin@artifact.com';
+      } else if (role === 'researcher') {
+        emailInput.placeholder = 'researcher@artifact.com';
+      } else {
+        emailInput.placeholder = 'you@artifact.com';
+      }
+
+      hideError();
+    }
+
+    function togglePassword() {
+      const pw = document.getElementById('password');
+      pw.type = pw.type === 'password' ? 'text' : 'password';
+    }
+
+    function showError(msg) {
+      const banner = document.getElementById('error-banner');
+      document.getElementById('error-msg').textContent = msg;
+      banner.classList.add('visible');
+    }
+
+    function hideError() {
+      document.getElementById('error-banner').classList.remove('visible');
+    }
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      hideError();
+
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const btn = document.getElementById('submit-btn');
+
+      if (!email) { showError('Please enter your email address.'); return; }
+      if (!password) { showError('Please enter your password.'); return; }
+
+      btn.textContent = 'Signing in…';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        showError('Invalid email or password. Please check your credentials.');
+        btn.textContent = 'Sign In';
+        btn.disabled = false;
+      }, 1400);
+    }
+  </script>
+
+</body>
+</html>
