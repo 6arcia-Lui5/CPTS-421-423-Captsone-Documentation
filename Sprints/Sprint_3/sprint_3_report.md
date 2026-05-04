@@ -1,4 +1,4 @@
-# Sprint 3 Report ([UPDATE DATE])
+# Sprint 3 Report (05/03/2026)
 
 ## YouTube link of Sprint * Video (Make this video unlisted)
 (https://youtu.be/XgfdpYvT8V0)
@@ -10,7 +10,7 @@
  * Users can **edit and delete their own records**
  * Improved frontend interaction with backend APIs (full CRUD support)
  * Authentication system implemented (users can sign up, log in, and manage their data)
- * User-specific views such as **"[MY RECORDS]" or profile page**
+ * User-specific views such as **"Profile" page**
  * Improved UI over prototype
 
 ---
@@ -30,7 +30,7 @@ This sprint emphasized full-stack integration and user interaction, transforming
 
 ## Unfinished Work
 Some features remain incomplete due to time constraints, including:
- * [collections, filtering and search, UI polish, Other user Profile Viewing, CSV import/export]
+ * collections, filtering and search, UI polish, Other user Profile Viewing, CSV import/export
  * Deployment is still partially deployed with the Neon Database, but local instance for the website, which is a decions the client wanted us to take until it is completely finished. 
  
  In the future, we will be integrating each of these issues and will have a full deployment.
@@ -48,7 +48,7 @@ Here are links to the issues that we completed in this sprint:
 ---
 
 ## Incomplete Issues/User Stories
-Here are links to issues we worked on but did not complete in this sprint:
+Here are links to issues we worked on but did not complete in this sprint (All due to time constraints):
 
  * [URL of issue 1] <<[REASON NOT COMPLETED]>>
  * [URL of issue 2] <<[REASON NOT COMPLETED]>>
@@ -59,9 +59,10 @@ Here are links to issues we worked on but did not complete in this sprint:
 ## Code Files for Review
 Please review the following code files, which were actively developed during this sprint, for quality:
 
- * [Frontend component file – e.g., CreatePage.jsx](https://github.com/[your_repo]/[file])
- * [Backend controller – e.g., recordController.js](https://github.com/[your_repo]/[file])
- * [Database schema or API file](https://github.com/[your_repo]/[file])
+ * Frontend - https://github.com/6arcia-Lui5/CPTS-421-423-Captsone-Documentation/tree/main/code/Sprint3Implementation/frontend
+ * Backend - https://github.com/6arcia-Lui5/CPTS-421-423-Captsone-Documentation/tree/main/code/Sprint3Implementation/backend
+ * Database Schema/Queries - https://github.com/6arcia-Lui5/CPTS-421-423-Captsone-Documentation/tree/main/code/Sprint3Implementation/backend/src/db
+ * API Endpoints - https://github.com/6arcia-Lui5/CPTS-421-423-Captsone-Documentation/blob/main/code/Sprint3Implementation/backend/src/index.ts
 
 ---
 
